@@ -1,0 +1,13 @@
+CREATE DATABASE memopt;
+
+CREATE TABLE performance_metrics
+(
+    id SERIAL PRIMARY KEY,
+    latency DOUBLE PRECISION NOT NULL,
+    mlp DOUBLE PRECISION NOT NULL,
+    aol DOUBLE PRECISION NOT NULL,
+    accesses BIGINT NOT NULL,
+    selected_tier VARCHAR(20) NOT NULL,
+    migrations INTEGER DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
