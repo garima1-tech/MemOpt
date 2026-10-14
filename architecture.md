@@ -87,3 +87,9 @@ migrate() moves a unit between tiers with a file rename. It fails if the source 
 ### applyPlacement()
 
 applyPlacement() makes the folders match a target placement. It does two passes: first it handles units that should be in SLOW (this frees space in FAST), then units that should be in FAST. Units that do not exist yet are placed, and units in the wrong tier are migrated. The moved counter counts only migrations, not new placements.
+
+### Manifest and reset
+
+saveManifest() writes tier_manifest.csv with the columns unit_id,tier,saved_at. Files are written to a temporary file first and then renamed, so the manifest is never half written.
+
+reset() removes only .unit files from both tier folders, so other files in those folders are kept.
