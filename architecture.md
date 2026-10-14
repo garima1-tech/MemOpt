@@ -73,3 +73,9 @@ TierManager simulates two memory tiers using two folders:
 - slow_memory/ is the logical SLOW tier
 
 Each data unit is a small placeholder file <unit_id>.unit. This is a simulation: both folders are on the same disk, so no real memory hardware changes.
+
+### place() and unit id validation
+
+`place()` creates the `.unit` file in the chosen tier. It refuses to overwrite a unit that already exists in either tier (use `migrate()` instead).
+
+Unit ids are validated: only letters, numbers, `_` and `-` are allowed, with length 1 to 40. This blocks path traversal such as `../x`.
