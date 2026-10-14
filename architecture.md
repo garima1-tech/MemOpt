@@ -69,11 +69,10 @@ Frontend Dashboard
 ## TierManager
 
 TierManager simulates two memory tiers using two folders:
-- fast_memory/ is the logical FAST tier
-- slow_memory/ is the logical SLOW tier
+- `fast_memory/` is the logical FAST tier
+- `slow_memory/` is the logical SLOW tier
 
-Each data unit is a small placeholder file <unit_id>.unit. This is a simulation: both folders are on the same disk, so no real memory hardware changes.
-
+Each data unit is a small placeholder file `<unit_id>.unit`. This is a simulation: both folders are on the same disk, so no real memory hardware changes.
 ### place() and unit id validation
 
 `place()` creates the `.unit` file in the chosen tier. It refuses to overwrite a unit that already exists in either tier (use `migrate()` instead).
