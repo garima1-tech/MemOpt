@@ -83,3 +83,7 @@ Unit ids are validated: only letters, numbers, `_` and `-` are allowed, with len
 ### migrate()
 
 migrate() moves a unit between tiers with a file rename. It fails if the source file is missing or if the destination already exists, so nothing is overwritten silently. After a successful move, a migrated=FROM->TO history line is added inside the file.
+
+### applyPlacement()
+
+applyPlacement() makes the folders match a target placement. It does two passes: first it handles units that should be in SLOW (this frees space in FAST), then units that should be in FAST. Units that do not exist yet are placed, and units in the wrong tier are migrated. The moved counter counts only migrations, not new placements.
