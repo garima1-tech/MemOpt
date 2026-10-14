@@ -65,3 +65,11 @@ Frontend Dashboard
 - Linux perf/PMU
 - HTML/CSS/JavaScript
 - Git/GitHub
+
+## TierManager
+
+TierManager simulates two memory tiers using two folders:
+- fast_memory/ is the logical FAST tier
+- slow_memory/ is the logical SLOW tier
+
+Each data unit is a small placeholder file <unit_id>.unit. This is a simulation: both folders are on the same disk, so no real memory hardware changes.
