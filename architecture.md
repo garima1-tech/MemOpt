@@ -79,3 +79,7 @@ Each data unit is a small placeholder file <unit_id>.unit. This is a simulation:
 `place()` creates the `.unit` file in the chosen tier. It refuses to overwrite a unit that already exists in either tier (use `migrate()` instead).
 
 Unit ids are validated: only letters, numbers, `_` and `-` are allowed, with length 1 to 40. This blocks path traversal such as `../x`.
+
+### migrate()
+
+migrate() moves a unit between tiers with a file rename. It fails if the source file is missing or if the destination already exists, so nothing is overwritten silently. After a successful move, a migrated=FROM->TO history line is added inside the file.
