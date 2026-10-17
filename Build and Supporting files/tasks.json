@@ -1,0 +1,36 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "MemOpt: setup database",
+      "type": "shell",
+      "command": "powershell -ExecutionPolicy Bypass -File scripts/setup_windows.ps1",
+      "linux": { "command": "./scripts/setup_linux.sh" },
+      "problemMatcher": []
+    },
+    {
+      "label": "MemOpt: build",
+      "type": "shell",
+      "command": "powershell -ExecutionPolicy Bypass -File scripts/build_windows.ps1",
+      "linux": { "command": "./scripts/build_linux.sh" },
+      "group": { "kind": "build", "isDefault": true },
+      "problemMatcher": ["$msCompile", "$gcc"]
+    },
+    {
+      "label": "MemOpt: build + test",
+      "type": "shell",
+      "command": "powershell -ExecutionPolicy Bypass -File scripts/build_windows.ps1 -Test",
+      "linux": { "command": "./scripts/build_linux.sh --test" },
+      "group": "test",
+      "problemMatcher": ["$msCompile", "$gcc"]
+    },
+    {
+      "label": "MemOpt: run dashboard",
+      "type": "shell",
+      "command": "powershell -ExecutionPolicy Bypass -File scripts/run_windows.ps1",
+      "linux": { "command": "./build/memopt serve" },
+      "isBackground": true,
+      "problemMatcher": []
+    }
+  ]
+}
