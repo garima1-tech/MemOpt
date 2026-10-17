@@ -1,0 +1,10 @@
+started_at,workload_type,epoch,repetitions,warmup_runs,query_name,executions,success,failure,total_ms,avg_ms,min_ms,max_ms,rows_returned,measurement
+2026-10-13T06:23:13,mixed,0,3,1,seq_scan_orders_range,18,18,0,2.4181,0.1343,0.0683,0.2278,1800,measured client round-trip (not memory latency)
+2026-10-13T06:23:13,mixed,0,3,1,seq_scan_transactions_range,18,18,0,2.2329,0.1240,0.0623,0.2075,1800,measured client round-trip (not memory latency)
+2026-10-13T06:23:13,mixed,0,3,1,seq_aggregate_orders_status,3,3,0,0.6616,0.2205,0.1865,0.2729,12,measured client round-trip (not memory latency)
+2026-10-13T06:23:13,mixed,0,3,1,lookup_user_by_id,900,900,0,76.9300,0.0855,0.0334,0.9783,900,measured client round-trip (not memory latency)
+2026-10-13T06:23:13,mixed,0,3,1,lookup_order_by_id,900,900,0,137.0202,0.1522,0.0801,2.1650,900,measured client round-trip (not memory latency)
+2026-10-13T06:23:13,mixed,0,3,1,popular_product_lookup,600,600,0,47.4118,0.0790,0.0307,0.3120,600,measured client round-trip (not memory latency)
+2026-10-13T06:23:13,mixed,0,3,1,popular_user_lookup,450,450,0,35.9298,0.0798,0.0652,0.3013,450,measured client round-trip (not memory latency)
+2026-10-13T06:23:13,mixed,0,3,1,join_order_details_range,3,3,0,8.3491,2.7830,2.6811,2.8785,600,measured client round-trip (not memory latency)
+2026-10-13T06:23:13,mixed,0,3,1,category_revenue_range,3,3,0,2.4889,0.8296,0.7430,0.9458,24,measured client round-trip (not memory latency)

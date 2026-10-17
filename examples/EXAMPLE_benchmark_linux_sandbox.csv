@@ -1,0 +1,13 @@
+benchmark_id,created_at,policy,epochs,repetitions_per_epoch,warmup_runs,fast_capacity,total_workload_ms,avg_query_ms,success,failure,fast_units,slow_units,migration_count,simulated_stall_cost,metric_basis,profiler,hardware_counters,note
+bench_20261013_062305,2026-10-13T06:23:05,hotness,4,3,1,6,1180.263,0.1006,11580,0,6,28,2,318779.4,synthetic,linux-perf,no,query times measured; placement + stall cost simulated
+bench_20261013_062305,2026-10-13T06:23:05,memopt,4,3,1,6,1247.251,0.1063,11580,0,6,28,8,311403.0,synthetic,linux-perf,no,query times measured; placement + stall cost simulated
+
+benchmark_id,policy,epoch,epoch_workload_ms,epoch_simulated_stall_cost
+bench_20261013_062305,hotness,0,289.416,
+bench_20261013_062305,hotness,1,276.861,107157.5
+bench_20261013_062305,hotness,2,298.094,108158.0
+bench_20261013_062305,hotness,3,315.892,103464.0
+bench_20261013_062305,memopt,0,305.596,
+bench_20261013_062305,memopt,1,312.820,102407.7
+bench_20261013_062305,memopt,2,332.689,103224.2
+bench_20261013_062305,memopt,3,296.146,105771.2
