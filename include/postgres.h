@@ -81,7 +81,11 @@ private:
 const std::vector<std::string>& requiredTables();
 const std::vector<std::string>& dataTables();  // users, products, orders, transactions
 
-
+struct TableInfo {
+    std::string name;
+    bool exists = false;
+    long long rows = -1;  // -1 = unknown
+};
 
 // Checks every required table (parameterized query against
 // information_schema) and counts rows of the existing ones.
