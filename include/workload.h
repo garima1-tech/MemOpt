@@ -98,20 +98,7 @@ public:
     WorkloadResult run(WorkloadType type, int repetitions, int warmup, int epoch = 0,
                        const ProgressFn& progress = {});
 
-private:
-    struct Ctx;
-    void runOnce(WorkloadType type, int epoch, std::mt19937& rng, Ctx& ctx);
-    void execute(Ctx& ctx, const std::string& name, const std::vector<long long>& params,
-                 const std::function<void(const PgResult&, AccessTracker&)>& attribute);
 
-    void seqPart(Ctx& ctx, int epoch);
-    void randomPart(Ctx& ctx, int epoch, std::mt19937& rng);
-    void popularPart(Ctx& ctx, std::mt19937& rng);
-    void joinPart(Ctx& ctx, int epoch);
-
-    PgConnection& db_;
-    const QueryLibrary& lib_;
-    unsigned seed_;
 };
 
 }  // namespace memopt
