@@ -133,4 +133,5 @@ TEST(dry_run_does_not_change_placement) {
     CHECK(p["hi"] == Tier::SLOW);
 }
 
-int main() { return RUN_ALL(); }
+int main() { return RUN_ALL();
+ }

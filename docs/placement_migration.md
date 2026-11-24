@@ -262,7 +262,6 @@ Both `fast_memory` and `slow_memory` are folders located on the same disk. The `
 
 Moving a file between these folders demonstrates the placement and migration decisions, but it does not physically move data between different memory hardware tiers.
 
-
 The main purpose of this implementation is to demonstrate how AOL-based placement, migration policies, tier capacity, and migration history can work together in a memory-management system.
 
 **The SOAR-inspired allocator and ALTO-inspired migration controller are simplified versions created for our project. They demonstrate the main concepts but do not implement the complete algorithms from the original research papers.**
