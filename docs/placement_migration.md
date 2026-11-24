@@ -262,7 +262,6 @@ Both `fast_memory` and `slow_memory` are folders located on the same disk. The `
 
 Moving a file between these folders demonstrates the placement and migration decisions, but it does not physically move data between different memory hardware tiers.
 
-It also does not move PostgreSQL's internal buffer pages.
 
 The main purpose of this implementation is to demonstrate how AOL-based placement, migration policies, tier capacity, and migration history can work together in a memory-management system.
 
