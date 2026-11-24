@@ -1,5 +1,7 @@
 // Tests: ALTO-inspired migration thresholds, hysteresis, cooldown,
 // confirmation, swap margin, capacity and dry-run mode.
+//tests/test_alto.cpp
+//this file is a part of the memopt project, which is licensed under the Apache license, version 2.0. 
 #include "alto.h"
 #include "test_util.h"
 
