@@ -198,6 +198,37 @@ $('#btn-db-tables').addEventListener('click', (ev) => busy(ev.target, 'Checking�
 }));
 
 // ----------------------------------------------------------- workload ----
+function workloadChart(el, queries) {
+  if (!queries.length) { el.innerHTML = '<p class="muted">No query timing data.</p>'; return; }
+  const W = 600, left = 190, right = 100, top = 10, rowH = 24, axisH = 34;
+  const plotWidth = W - left - right;
+  const maxMs = Math.max(0, ...queries.map((q) => Number.isFinite(q.avg_ms) ? q.avg_ms : 0));
+  const scaleMax = maxMs || 1;
+  const plotBottom = top + queries.length * rowH;
+  const H = plotBottom + axisH;
+  const x = (value) => left + Math.sqrt(Math.max(0, value) / scaleMax) * plotWidth;
+  let out = '';
+
+  for (let tick = 0; tick <= 4; tick++) {
+    const tickValue = scaleMax * tick / 4;
+    const tickX = x(tickValue);
+    out += `<line class="axis" x1="${tickX}" y1="${top}" x2="${tickX}" y2="${plotBottom}" stroke-dasharray="${tick === 0 ? 'none' : '2 4'}"/>`;
+    out += `<text x="${tickX}" y="${plotBottom + 14}" text-anchor="middle">${fmt(tickValue, 4)}</text>`;
+  }
+
+  queries.forEach((q, i) => {
+    const value = Number.isFinite(q.avg_ms) ? Math.max(0, q.avg_ms) : 0;
+    const y = top + i * rowH;
+    const width = x(value) - left;
+    const label = q.name.replace(/_/g, ' ').slice(0, 26);
+    out += `<text x="${left - 8}" y="${y + 15}" text-anchor="end" class="lbl">${esc(label)}</text>`;
+    out += `<rect x="${left}" y="${y + 3}" width="${width}" height="15" rx="3" fill="${css('--accent')}"><title>${esc(q.name)}: ${fmt(value, 4)} ms average</title></rect>`;
+    out += `<text x="${left + width + 6}" y="${y + 15}">${fmt(value, 4)} ms</text>`;
+  });
+  out += `<text x="${left + plotWidth / 2}" y="${H - 2}" text-anchor="middle">Average query time (ms; square-root scale)</text>`;
+  el.innerHTML = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Average query times on a shared millisecond scale">${out}</svg>`;
+}
+
 function renderWorkload(r) {
   $('#wl-summary').innerHTML = kv([
     ['Workload', `<strong>${esc(r.workload)}</strong> · ${r.repetitions} measured repetition(s), ${r.warmup_runs} warm-up`],
@@ -208,7 +239,7 @@ function renderWorkload(r) {
   $('#wl-table').innerHTML = `<div class="scroll"><table><thead><tr><th>Query</th><th class="num">Executions</th><th class="num">Total ms</th><th class="num">Avg ms</th><th class="num">Min ms</th><th class="num">Max ms</th><th class="num">Rows</th><th class="num">OK</th><th class="num">Failed</th></tr></thead><tbody>${
     r.queries.map((q) => `<tr><td><code>${esc(q.name)}</code></td><td class="num">${q.executions}</td><td class="num">${fmt(q.total_ms, 2)}</td><td class="num">${fmt(q.avg_ms, 4)}</td><td class="num">${fmt(q.min_ms, 4)}</td><td class="num">${fmt(q.max_ms, 4)}</td><td class="num">${fmt(q.rows, 0)}</td><td class="num">${q.success}</td><td class="num">${q.failure}</td></tr>`).join('')
   }</tbody></table></div>`;
-  barChart($('#wl-chart'), r.queries.map((q) => ({ label: q.name.replace(/_/g, ' ').slice(0, 26), bars: [{ value: q.avg_ms, color: css('--accent'), text: `${fmt(q.avg_ms, 4)} ms avg` }] })), { left: 190 });
+  workloadChart($('#wl-chart'), r.queries);
 }
 
 $('#btn-wl-run').addEventListener('click', (ev) => busy(ev.target, 'Running SQL…', async () => {
